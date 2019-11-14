@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "8.5.0",
+    "npm": "5.3.0"
+  },
   "scripts": {
+    "heroku-postbuild": "npm install --production",
+    "start": "node cd api index.js",
     "dev": "nodemon --exec babel-node ./api/index.js",
     "build": "rm -rf ./build && babel -d ./build ./api -s",
     "test": "export NODE_ENV=test &&  sequelize db:migrate:undo:all  && sequelize db:migrate  && nyc --require @babel/register  mocha ./api/test/test.js --timeout 20000 --exit",
@@ -11,6 +17,7 @@
     "coveralls-coverage": "coveralls < lcov.info",
     "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
     "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
+    
   },
   "keywords": [],
   "author": "",
